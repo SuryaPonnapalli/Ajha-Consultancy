@@ -11,8 +11,8 @@ const NavBar = () => {
     { id: "/aboutus", title: "About Us" },
     { id: "/board", title: "Executive Board" },
     { id: "/business", title: "Business" },
-    { id: "clients", title: "Clients" },
-    { id: "contactus", title: "Contact Us" },
+    // { id: "clients", title: "Clients" },
+    // { id: "contactus", title: "Contact Us" },
   ];
 
   return (
