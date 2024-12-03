@@ -3,8 +3,8 @@ import logo from "../assets/Staffing-2.jpg";
 const ContactUs = () => {
   return (
     <section
-      className="py-16 w-full relative"
       id="contactus"
+      className="py-16 w-full relative"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${logo})`,
         backgroundSize: "cover",
@@ -21,12 +21,16 @@ const ContactUs = () => {
 
             <form
               className="space-y-6 flex flex-col items-center"
-              name="sign-up"
+              action="https://api.web3forms.com/submit"
+              method="POST"
             >
+              {/* Web3Forms Access Key */}
+              <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY" />
+
               <input
                 type="text"
                 placeholder="Your Name"
-                name="full-name"
+                name="name"
                 required
                 className="w-3/4 p-3 my-4 rounded border border-gray-500 focus:border-red-500 focus:outline-none transition bg-gray-800 text-gray-100 placeholder-gray-400"
               />
@@ -42,12 +46,14 @@ const ContactUs = () => {
               <input
                 type="text"
                 placeholder="Subject"
+                name="subject"
                 required
                 className="w-3/4 p-3 my-4 rounded border border-gray-500 focus:border-red-500 focus:outline-none transition bg-gray-800 text-gray-100 placeholder-gray-400"
               />
 
               <textarea
                 placeholder="Message"
+                name="message"
                 required
                 className="w-3/4 p-3 my-4 rounded border border-gray-500 focus:border-red-500 focus:outline-none transition bg-gray-800 text-gray-100 placeholder-gray-400 h-32 resize-none"
               />
