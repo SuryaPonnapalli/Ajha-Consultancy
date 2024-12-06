@@ -1,6 +1,49 @@
+import { useState } from "react";
 import logo from "../assets/Staffing-2.jpg";
 
 const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...formData,
+        access_key: "aec83334-d88e-428d-9f46-d5ee36700061", // Replace with your actual access key
+      }),
+    });
+
+    if (response.ok) {
+      alert("Form submitted successfully!");
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <section
       id="contactus"
@@ -21,16 +64,14 @@ const ContactUs = () => {
 
             <form
               className="space-y-6 flex flex-col items-center"
-              action="https://api.web3forms.com/submit"
-              method="POST"
+              onSubmit={handleSubmit}
             >
-              {/* Web3Forms Access Key */}
-              <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY" />
-
               <input
                 type="text"
                 placeholder="Your Name"
                 name="name"
+                value={formData.name}
+                onChange={handleChange}
                 required
                 className="w-3/4 p-3 my-4 rounded border border-gray-500 focus:border-red-500 focus:outline-none transition bg-gray-800 text-gray-100 placeholder-gray-400"
               />
@@ -39,6 +80,8 @@ const ContactUs = () => {
                 type="email"
                 placeholder="Your Email"
                 name="email"
+                value={formData.email}
+                onChange={handleChange}
                 required
                 className="w-3/4 p-3 my-4 rounded border border-gray-500 focus:border-red-500 focus:outline-none transition bg-gray-800 text-gray-100 placeholder-gray-400"
               />
@@ -47,6 +90,8 @@ const ContactUs = () => {
                 type="text"
                 placeholder="Subject"
                 name="subject"
+                value={formData.subject}
+                onChange={handleChange}
                 required
                 className="w-3/4 p-3 my-4 rounded border border-gray-500 focus:border-red-500 focus:outline-none transition bg-gray-800 text-gray-100 placeholder-gray-400"
               />
@@ -54,6 +99,8 @@ const ContactUs = () => {
               <textarea
                 placeholder="Message"
                 name="message"
+                value={formData.message}
+                onChange={handleChange}
                 required
                 className="w-3/4 p-3 my-4 rounded border border-gray-500 focus:border-red-500 focus:outline-none transition bg-gray-800 text-gray-100 placeholder-gray-400 h-32 resize-none"
               />
